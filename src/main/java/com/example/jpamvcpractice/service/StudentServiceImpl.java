@@ -34,9 +34,11 @@ public class StudentServiceImpl implements StudentService{
         Student s =  studentRepository.findById(studentId).orElse(null);
         //如果有 -> 執行更新; 反之則失敗
         if (s != null) {
-            //將請求路徑的id設定給參數student
-            student.setId(studentId);
-            studentRepository.save(student);
+            //更新查詢出來的object數據
+            //將請求的數據各個欄位的value設定給剛查詢出的object
+            s.setName(student.getName());
+            s.setAge(student.getAge());
+            studentRepository.save(s);
             return true;
         } else {
             return false;
